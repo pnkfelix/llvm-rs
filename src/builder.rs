@@ -114,6 +114,22 @@ impl Builder {
     pub fn build_bit_cast(&self, value: &Value, dest: &Type) -> &Value {
         unsafe { core::LLVMBuildBitCast(self.into(), value.into(), dest.into(), NULL_NAME.as_ptr()).into() }
     }
+    /// Build an instruction that converts a float to an unsigned integer of a given type.
+    pub fn build_fp_to_ui(&self, value: &Value, dest: &Type) -> &Value {
+        unsafe { core::LLVMBuildFPToUI(self.into(), value.into(), dest.into(), NULL_NAME.as_ptr()).into() }
+    }
+    /// Build an instruction that converts a float to a signed integer of a given type.
+    pub fn build_fp_to_si(&self, value: &Value, dest: &Type) -> &Value {
+        unsafe { core::LLVMBuildFPToSI(self.into(), value.into(), dest.into(), NULL_NAME.as_ptr()).into() }
+    }
+    /// Build an instruction that converts an unsigned integer to a float of a given type.
+    pub fn build_ui_to_fp(&self, value: &Value, dest: &Type) -> &Value {
+        unsafe { core::LLVMBuildUIToFP(self.into(), value.into(), dest.into(), NULL_NAME.as_ptr()).into() }
+    }
+    /// Build an instruction that converts a signed integer to a float of a given type.
+    pub fn build_si_to_fp(&self, value: &Value, dest: &Type) -> &Value {
+        unsafe { core::LLVMBuildSIToFP(self.into(), value.into(), dest.into(), NULL_NAME.as_ptr()).into() }
+    }
     /// Build an instruction that inserts a value into an aggregate data value.
     pub fn build_insert_value(&self, agg: &Value, elem: &Value, index: usize) -> &Value {
         unsafe { core::LLVMBuildInsertValue(self.into(), agg.into(), elem.into(), index as c_uint, NULL_NAME.as_ptr()).into() }
